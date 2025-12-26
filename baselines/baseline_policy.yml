@@ -1,0 +1,22 @@
+baseline:
+  allowed_ports_common:
+    - 22
+    - 80
+    - 443
+    - 3389
+    - 445
+
+  flagged_ports:
+    - 21    # FTP
+    - 23    # Telnet
+    - 69    # TFTP
+    - 135   # RPC
+    - 139   # NetBIOS
+    - 1433  # MSSQL
+    - 3306  # MySQL
+
+rules:
+  severity:
+    flagged_port_open: HIGH
+    unexpected_port_open: MEDIUM
+    no_response: LOW
