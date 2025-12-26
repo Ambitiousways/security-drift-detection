@@ -1,197 +1,107 @@
-!\[Tests](../../actions/workflows/tests.yml/badge.svg)
+![Tests](https://github.com/Ambitiousways/security-drift-detection/actions/workflows/tests.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.12%2B-blue)
+![Status](https://img.shields.io/badge/status-active-success)
+![License](https://img.shields.io/badge/license-MIT-informational)
 
+# Security Drift Detection
 
+**Security Drift Detection** is a Python-based cybersecurity tool that identifies when systems deviate from approved security baselines over time. It captures infrastructure snapshots, evaluates drift against policy, assigns risk severity, and stores results in an audit-ready history.
 
-\# Security Drift Detection
+Built for **authorized, non-disruptive use** in enterprise, manufacturing, and regulated environments.
 
-
-
-A Python-based security tool that detects when infrastructure deviates from approved security baselines over time. It captures snapshots of observed open ports, evaluates drift against a YAML baseline policy, assigns risk severity, and stores results in an audit-ready history using SQLite.
-
-
-
-Repository: https://github.com/Ambitiousways/security-drift-detection
-
-
+🔗 Repository: https://github.com/Ambitiousways/security-drift-detection
 
 ---
 
+## Why this matters
 
+Many security incidents are not caused by new vulnerabilities — they happen because environments **drift**:
 
-\## Why this matters
+- Temporary changes are never reverted  
+- Legacy services get re-enabled  
+- Ports reopen after updates or troubleshooting  
+- Baseline hardening weakens over time  
 
+This tool helps teams answer:
 
+> **What changed, when did it change, and why does it matter?**
 
-Security failures often happen because environments \*\*drift\*\*:
-
-\- “Temporary” changes become permanent
-
-\- Legacy services get re-enabled
-
-\- Ports reopen after updates or troubleshooting
-
-\- Baseline controls are unintentionally weakened
-
-
-
-This project helps teams answer:
-
-
-
-\*\*“What changed, why does it matter, and when did it happen?”\*\*
-
-
-
-It is designed for \*\*authorized, non-disruptive\*\* use in enterprise and regulated environments.
-
-
+It is designed to support **security operations, audits, and remediation workflows**, not exploitation.
 
 ---
 
+## What the tool does
 
-
-\## What it does
-
-
-
-\- Capture snapshots of observed open ports for a target (authorized scanning)
-
-\- Validate snapshots against a baseline policy (YAML)
-
-\- Flag drift findings with severity and risk scoring
-
-\- Persist results to SQLite for audit/history
-
-\- Provide a clean CLI workflow for repeatable operations
-
-
+- Captures snapshots of observed open ports (authorized scanning)
+- Validates snapshots against an approved baseline policy (YAML)
+- Flags security drift with severity and risk scoring
+- Persists results in SQLite for historical tracking
+- Provides a clean, production-style CLI
 
 ---
 
+## Key capabilities
 
+- **Baseline-driven evaluation**
+  - Configurable via `baselines/baseline_policy.yml`
 
-\## Key features
+- **Risk classification**
+  - Flagged ports (e.g., Telnet, FTP) → **HIGH**
+  - Unexpected ports → **MEDIUM**
+  - Risk score + risk level (`LOW | MEDIUM | HIGH`)
 
+- **Audit & history**
+  - Persistent storage of drift runs
+  - Full retrieval by run ID
 
-
-\- Baseline-driven evaluation (`baselines/baseline\_policy.yml`)
-
-\- Findings classification:
-
-&nbsp; - Flagged ports (e.g., Telnet/FTP) → HIGH severity
-
-&nbsp; - Unexpected ports (not baseline allowed) → MEDIUM severity
-
-\- Risk scoring + risk level (`LOW | MEDIUM | HIGH`)
-
-\- Persistent run history:
-
-&nbsp; - `history` to list runs
-
-&nbsp; - `show` to retrieve full run result
-
-\- Tests with `pytest`
-
-\- CI via GitHub Actions
-
-
+- **Engineering quality**
+  - Unit tests with `pytest`
+  - Automated CI via GitHub Actions
+  - Modular, extensible design
 
 ---
 
+## Demo Output
 
+> Screenshots are stored under `examples/screenshots/`
 
-\## Demo Output
+### Drift Check (Baseline Enforcement)
+![Drift Check](./examples/screenshots/check_drift.png)
 
+### History (Audit & Persistence)
+![History](./examples/screenshots/history.png)
 
+### Run Details (Audit Evidence)
+![Run Details](./examples/screenshots/show_run.png)
 
-> Save your screenshots under `examples/screenshots/` using these exact filenames:
+### CLI Interface
+![CLI Help](./examples/screenshots/cli_help.png)
 
-> - `check\_drift.png`
-
-> - `history.png`
-
-> - `show\_run.png`
-
-> - `cli\_help.png`
-
-> - `tests.png`
-
-
-
-\### Drift Check (Baseline Enforcement)
-
-!\[Drift Check](./examples/screenshots/check\_drift.png)
-
-
-
-\### History (Audit \& Persistence)
-
-!\[History](./examples/screenshots/history.png)
-
-
-
-\### Run Details (Audit Evidence)
-
-!\[Run Details](./examples/screenshots/show\_run.png)
-
-
-
-\### CLI Interface
-
-!\[CLI Help](./examples/screenshots/cli\_help.png)
-
-
-
-\### Test Suite
-
-!\[Tests Passing](./examples/screenshots/tests.png)
-
-
+### Test Suite
+![Tests Passing](./examples/screenshots/tests.png)
 
 ---
 
-
-
-\## Project structure
-
-
+## Project structure
 
 ```text
-
 security-drift-detection/
-
 ├── baselines/
-
-│   └── baseline\_policy.yml
-
+│   └── baseline_policy.yml
 ├── cli/
-
 │   └── main.py
-
 ├── db/
-
 │   ├── models.py
-
 │   ├── repo.py
-
 │   └── session.py
-
 ├── drift/
-
 │   ├── capture.py
-
 │   └── compare.py
-
 ├── examples/
-
 │   └── screenshots/
-
 ├── snapshots/
-
 ├── tests/
-
 ├── requirements.txt
-
 └── README.md
 
 
